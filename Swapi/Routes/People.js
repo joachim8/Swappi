@@ -1,8 +1,21 @@
 const express = require('express');
+const { default: mongoose } = require('mongoose');
 const router = express.Router();
 const People = require('../models/people');
-
+const db = mongoose.connection;
 // Route de création d'une personne
+
+
+// Route pour obtenir tous les peoples
+router.get('/', async (req, res) => {
+    try {
+        const peoples = await People.find();
+        res.json(peoples);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
 router.post('/', async (req, res) => {
     try {
         const person = await People.create(req.body);
@@ -11,17 +24,6 @@ router.post('/', async (req, res) => {
         res.status(500).json({ error: 'Failed to create a person' });
     }
 });
-
-// Route de lecture de toutes les personnes
-router.get('/', async (req, res) => {
-    try {
-        const people = await People.find();
-        res.json(people);
-    } catch (error) {
-        res.status(500).json({ error: 'Failed to fetch people' });
-    }
-});
-
 // Route de lecture d'une personne par ID
 router.get('/:id', async (req, res) => {
 

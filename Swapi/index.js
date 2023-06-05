@@ -1,42 +1,35 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
-const authMiddleware = require('./middlewares/auth');
-const peopleRoutes = require('./routes/people');
 
 const app = express();
 const port = 3000;
 
 // Connexion à MongoDB
-mongoose.connect('mongodb+srv://joachim:Passw0rd@cluster0.er0q1ui.mongodb.net/', { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => {
-        console.log('Connected to MongoDb');
-    })
-    .catch((error) => {
-        console.error('Failed to connect to MongoDB:', error);
-    });
+mongoose.connect('mongodb+srv://joachim:Passw0rd@cluster0.er0q1ui.mongodb.net/swapi', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+});
 
-// Middleware pour le traitement du corps des requêtes en JSON
+// Vérification de la connexion à MongoDB
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'Erreur de connexion à MongoDB'));
+db.once('open', () => {
+    console.log('Connecté à MongoDB');
+});
+
+// Middleware pour parser les requêtes en JSON
 app.use(express.json());
 
-//// Middleware d'authentification
-//app.use('/api', authMiddleware);
-
-// Routes pour les personnes (people)
-app.use('/api/people', peopleRoutes);
+// Routes
+const peopleRouter = require('./routes/people');
+app.use('/api/people', peopleRouter);
 
 // Documentation Swagger
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-
-
-
-
-
-// Démarrer le serveur
+// Lancement du serveur
 app.listen(port, () => {
-    console.log(`Server listening on port ${port}`);
+    console.log(`Serveur démarré sur le port ${port}`);
 });

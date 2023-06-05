@@ -241,11 +241,15 @@
         },
         "birth_year": {
           "type": "string"
-        }
+        },
+        "model": { "type": "string" },
+
+        "pk" : {"type": "integer"}
       },
       "required": [
         "name",
-        "gender"
+        "gender",
+        "pk"
       ]
     }
   }

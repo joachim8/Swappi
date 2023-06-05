@@ -44,7 +44,12 @@ const peopleSchema = new mongoose.Schema({
     birth_year: {
         type: String,
         required: true
-    }
-});
+    },
+    model:
+        { type: String, required: true },
+    pk: { type: Number, required: true },
+},
+{ collection: 'people' } // Spécifiez le nom de la collection ici
+);
 
 module.exports = mongoose.model('People', peopleSchema);
