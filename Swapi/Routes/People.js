@@ -27,7 +27,7 @@ router.get('/:id', async (req, res) => {
 
         let person;
         try {
-            person = await People.findById(req.params.id,);
+            person = await People.findById(req.params.id)
             if (person == null) {
                 return res.status(404).json({ message: 'Cannot find person' });
             }

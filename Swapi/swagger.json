@@ -1,196 +1,252 @@
 {
-  "openapi": "3.0.0",
+  "swagger": "2.0",
   "info": {
+    "version": "1.0.0",
     "title": "SWAPI API",
-    "version": "1.0.0"
+    "description": "API documentation for SWAPI"
   },
-  "servers": [
+  "basePath": "/api",
+  "tags": [
     {
-      "url": "http://localhost:3000/api"
+      "name": "People",
+      "description": "Operations related to People"
     }
   ],
   "paths": {
     "/people": {
-      "post": {
-        "summary": "Create a person",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Person"
+      "get": {
+        "tags": [ "People" ],
+        "summary": "Get all people",
+        "produces": [ "application/json" ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Person"
               }
             }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Created"
           },
           "500": {
-            "description": "Failed to create a person"
+            "description": "Internal server error"
           }
         }
       },
-      "get": {
-        "summary": "Get all people",
+      "post": {
+        "tags": [ "People" ],
+        "summary": "Create a new person",
+        "produces": [ "application/json" ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Person object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PersonInput"
+            }
+          }
+        ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "201": {
+            "description": "Person created",
+            "schema": {
+              "$ref": "#/definitions/Person"
+            }
+          },
+          "400": {
+            "description": "Bad request"
           },
           "500": {
-            "description": "Failed to fetch people"
+            "description": "Internal server error"
           }
         }
       }
     },
     "/people/{id}": {
       "get": {
+        "tags": [ "People" ],
         "summary": "Get a person by ID",
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "name": "id",
             "in": "path",
+            "description": "ID of the person",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/Person"
+            }
           },
           "404": {
             "description": "Person not found"
           },
           "500": {
-            "description": "Failed to fetch person"
+            "description": "Internal server error"
           }
         }
       },
-      "put": {
+      "patch": {
+        "tags": [ "People" ],
         "summary": "Update a person",
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "name": "id",
             "in": "path",
+            "description": "ID of the person",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Updated person object",
             "required": true,
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/PersonInput"
             }
           }
         ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Person"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Person updated",
+            "schema": {
+              "$ref": "#/definitions/Person"
+            }
+          },
+          "400": {
+            "description": "Bad request"
           },
           "404": {
             "description": "Person not found"
           },
           "500": {
-            "description": "Failed to update person"
+            "description": "Internal server error"
           }
         }
       },
       "delete": {
+        "tags": [ "People" ],
         "summary": "Delete a person",
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "name": "id",
             "in": "path",
+            "description": "ID of the person",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Person deleted"
           },
           "404": {
             "description": "Person not found"
           },
           "500": {
-            "description": "Failed to delete person"
+            "description": "Internal server error"
           }
         }
       }
     }
   },
-  "components": {
-    "schemas": {
-      "Person": {
-        "type": "object",
-        "properties": {
-          "edited": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "name": {
-            "type": "string"
-          },
-          "created": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "gender": {
-            "type": "string"
-          },
-
-          "skin_color": {
-            "type": "string"
-          },
-          "hair_color": {
-            "type": "string"
-          },
-          "height": {
-            "type": "string"
-          },
-          "eye_color": {
-            "type": "string"
-          },
-          "mass": {
-            "type": "string"
-          },
-
-          "homeworld": {
-            "type": "string"
-          },
-          "birth_year": {
-            "type": "string"
-          }
-
+  "definitions": {
+    "Person": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string"
         },
-        "required": [
-          "name",
-          "height",
-          "mass",
-          "hair_color",
-          "skin_color",
-          "eye_color",
-          "birth_year",
-          "gender",
-          "created",
-          "edited",
-          "homeworld",
-          "films",
-          "species",
-          "vehicles",
-          "starships"
-        ]
+        "edited": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "name": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "gender": {
+          "type": "string"
+        },
+        "skin_color": {
+          "type": "string"
+        },
+        "hair_color": {
+          "type": "string"
+        },
+        "height": {
+          "type": "string"
+        },
+        "eye_color": {
+          "type": "string"
+        },
+        "mass": {
+          "type": "string"
+        },
+        "homeworld": {
+          "type": "number"
+        },
+        "birth_year": {
+          "type": "string"
+        }
       }
+    },
+    "PersonInput": {
+      "type": "object",
+      "properties": {
+        "edited": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "name": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "gender": {
+          "type": "string"
+        },
+        "skin_color": {
+          "type": "string"
+        },
+        "hair_color": {
+          "type": "string"
+        },
+        "height": {
+          "type": "string"
+        },
+        "eye_color": {
+          "type": "string"
+        },
+        "mass": {
+          "type": "string"
+        },
+        "homeworld": {
+          "type": "number"
+        },
+        "birth_year": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "gender"
+      ]
     }
   }
 }

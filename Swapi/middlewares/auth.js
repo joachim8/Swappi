@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
-const SECRET_KEY = '011154545';
+const SECRET_KEY = '01115454';
 
 // Middleware d'authentification
 function authMiddleware(req, res, next) {

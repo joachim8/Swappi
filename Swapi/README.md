@@ -42,7 +42,7 @@ Le modèle de Richardson est un modèle qui classe les API REST en quatre niveaux 
 
 Dans ce projet, nous avons atteint le niveau 2 du modèle de Richardson. Les ressources sont correctement identifiées et les verbes HTTP appropriés sont utilisés pour effectuer des opérations CRUD.
 
-Pour atteindre le niveau 3, nous pourrions ajouter des liens dans les réponses de l'API pour permettre à l'utilisateur de naviguer à travers les ressources de manière dynamique.
+Pour atteindre le niveau 3, nous pourrion ajouter des liens dans les réponses de l'API pour permettre à l'utilisateur de naviguer à travers les ressources de manière dynamique.
 
 ## Installation et exécution
 
