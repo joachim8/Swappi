@@ -1,0 +1,196 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "SWAPI API",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/api"
+    }
+  ],
+  "paths": {
+    "/people": {
+      "post": {
+        "summary": "Create a person",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Person"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Failed to create a person"
+          }
+        }
+      },
+      "get": {
+        "summary": "Get all people",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Failed to fetch people"
+          }
+        }
+      }
+    },
+    "/people/{id}": {
+      "get": {
+        "summary": "Get a person by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Person not found"
+          },
+          "500": {
+            "description": "Failed to fetch person"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a person",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Person"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Person not found"
+          },
+          "500": {
+            "description": "Failed to update person"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a person",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Person not found"
+          },
+          "500": {
+            "description": "Failed to delete person"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Person": {
+        "type": "object",
+        "properties": {
+          "edited": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string"
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "gender": {
+            "type": "string"
+          },
+
+          "skin_color": {
+            "type": "string"
+          },
+          "hair_color": {
+            "type": "string"
+          },
+          "height": {
+            "type": "string"
+          },
+          "eye_color": {
+            "type": "string"
+          },
+          "mass": {
+            "type": "string"
+          },
+
+          "homeworld": {
+            "type": "string"
+          },
+          "birth_year": {
+            "type": "string"
+          }
+
+        },
+        "required": [
+          "name",
+          "height",
+          "mass",
+          "hair_color",
+          "skin_color",
+          "eye_color",
+          "birth_year",
+          "gender",
+          "created",
+          "edited",
+          "homeworld",
+          "films",
+          "species",
+          "vehicles",
+          "starships"
+        ]
+      }
+    }
+  }
+}
