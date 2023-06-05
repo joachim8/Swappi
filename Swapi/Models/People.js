@@ -49,7 +49,7 @@ const peopleSchema = new mongoose.Schema({
         { type: String, required: true },
     pk: { type: Number, required: true },
 },
-{ collection: 'people' } // Spécifiez le nom de la collection ici
+{ collection: 'people' } 
 );
 
 module.exports = mongoose.model('People', peopleSchema);

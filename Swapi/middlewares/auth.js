@@ -8,12 +8,13 @@ function authMiddleware(req, res, next) {
     // Vérification du token
     const token = req.headers.authorization;
     if (!token) {
-        return res.status(401).json({ error: 'Unauthorized' });
+        return res.status(401).json({ error: 'Non autoriser' });
     }
 
     jwt.verify(token, SECRET_KEY, (err, decoded) => {
         if (err) {
-            return res.status(401).json({ error: 'Unauthorized' });
+            return res.status(401).json({
+                error: 'Non autoriser' });
         }
         req.userId = decoded.userId;
         next();
