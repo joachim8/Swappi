@@ -20,10 +20,10 @@ API pour accéder aux données de SWAPI (Star Wars API) et les stocker dans MongoD
 - `POST /api/people` - Crée une nouvelle personne.
 - `GET /api/people` - Récupère toutes les personnes.
 - `GET /api/people/{id}` - Récupère une personne par ID.
-- `PUT /api/people/{id}` - Met à jour une personne par ID.
+- `Patch /api/people/{id}` - Met à jour une personne par ID.
 - `DELETE /api/people/{id}` - Supprime une personne par ID.
 
-### Planets, Films, Species, Vehicles, Starships
+### Planets, Films, Species, Vehicles, Starships, People
 
 (À implémenter de manière similaire à la ressource People)
 

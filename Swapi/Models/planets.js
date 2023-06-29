@@ -1,52 +1,48 @@
 const mongoose = require('mongoose');
 
-const peopleSchema = new mongoose.Schema({
+const planetsSchema = new mongoose.Schema({
     edited: {
         type: Date,
         required: true
     },
-    name: {
+    climate: {
         type: String,
+        required: true
+    },
+    surface_water: {
+        type: Number,
+        required: true
+    },
+    diameter: {
+        type: Number,
+        required: true
+    },
+    rotation_period: {
+        type: Number,
         required: true
     },
     created: {
         type: Date,
         required: true
     },
-    gender: {
+    terrain: {
         type: String,
         required: true
     },
-    skin_color: {
+    gravity: {
         type: String,
         required: true
     },
-    hair_color: {
+    orbital_period: {
         type: String,
         required: true
     },
-    height: {
-        type: String,
-        required: true
-    },
-    eye_color: {
-        type: String,
-        required: true
-    },
-    mass: {
-        type: String,
-        required: true
-    },
-    homeworld: {
+    population: {
         type: Number,
         required: true
     },
-    birth_year: {
-        type: String,
-        required: true
-    },
 },
-{ collection: 'people' } 
+    { collection: 'planets' }
 );
 
-module.exports = mongoose.model('People', peopleSchema);
+module.exports = mongoose.model('planets', planetsSchema);

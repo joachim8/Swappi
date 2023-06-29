@@ -1,11 +1,21 @@
 const mongoose = require('mongoose');
 
-const peopleSchema = new mongoose.Schema({
+
+const speciesSchema = new mongoose.Schema({
     edited: {
         type: Date,
         required: true
     },
+
+   classification: {
+        type: String,
+        required: true
+    },
     name: {
+        type: String,
+        required: true
+    },
+    designation: {
         type: String,
         required: true
     },
@@ -13,27 +23,23 @@ const peopleSchema = new mongoose.Schema({
         type: Date,
         required: true
     },
-    gender: {
+    eye_colors: {
         type: String,
         required: true
     },
-    skin_color: {
+    people: {
+        type: Array,
+        required: true
+    },
+    skin_colors: {
         type: String,
         required: true
     },
-    hair_color: {
+    language: {
         type: String,
         required: true
     },
-    height: {
-        type: String,
-        required: true
-    },
-    eye_color: {
-        type: String,
-        required: true
-    },
-    mass: {
+    hair_colors: {
         type: String,
         required: true
     },
@@ -41,12 +47,17 @@ const peopleSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    birth_year: {
-        type: String,
+    average_lifespan: {
+        type: Number,
         required: true
     },
+    average_height: {
+        type: Number,
+        required: true
+    }
+
 },
-{ collection: 'people' } 
+    { collection: 'species' }
 );
 
-module.exports = mongoose.model('People', peopleSchema);
+module.exports = mongoose.model('species', speciesSchema);

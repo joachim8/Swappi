@@ -30,7 +30,40 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="Controller\handle.js">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="index.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Models\films.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Models\planets.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Models\species.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Models\starships.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Models\vehicles.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Routes\filmsRoute.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Routes\planetsRoutes.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Routes\speciesRoutes.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Routes\starshipsRoutes.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Routes\vehiclesRoutes.js">
       <SubType>Code</SubType>
     </Content>
     <Content Include="swagger.json">
@@ -43,13 +76,14 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="README.md" />
-    <Content Include="Routes\people.js">
+    <Content Include="Routes\peopleRoutes.js">
       <SubType>Code</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="middlewares\" />
+    <Folder Include="Controller\" />
     <Folder Include="Routes\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />

@@ -1,261 +1,975 @@
 {
-  "swagger": "2.0",
-  "info": {
-    "version": "1.0.0",
-    "title": "SWAPI API",
-    "description": "API documentation for SWAPI"
+  "openapi": "3.0.0",
+  "x-stoplight": {
+    "id": "319cbbd1932d6"
   },
-  "basePath": "/api",
+  "info": {
+    "title": "StarWars API Joachim",
+    "version": "1.5.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/api"
+    }
+  ],
   "tags": [
     {
-      "name": "People",
-      "description": "Operations related to People"
+      "name": "People"
+    },
+    {
+      "name": "Films"
+    },
+    {
+      "name": "Planets"
+    },
+    {
+      "name": "Species"
+    },
+    {
+      "name": "Starships"
+    },
+    {
+      "name": "Vehicules"
     }
   ],
   "paths": {
     "/people": {
       "get": {
-        "tags": [ "People" ],
-        "summary": "Get all people",
-        "produces": [ "application/json" ],
+        "tags": [
+          "People"
+        ],
+        "summary": "Get All",
         "responses": {
           "200": {
-            "description": "Successful operation",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Person"
-              }
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
             }
           },
           "500": {
-            "description": "Internal server error"
+            "description": "Internal Server Error"
           }
         }
       },
       "post": {
-        "tags": [ "People" ],
-        "summary": "Create a new person",
-        "produces": [ "application/json" ],
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Person object",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PersonInput"
+        "tags": [
+          "People"
+        ],
+        "summary": "Create",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "name": "Din Djarin",
+                  "gender": "male",
+                  "skin_color": "fair",
+                  "hair_color": "brown",
+                  "height": "184",
+                  "eye_color": "black",
+                  "mass": "80",
+                  "homeworld": 12,
+                  "birth_year": "unknown"
+                }
+              }
             }
           }
-        ],
+        },
         "responses": {
           "201": {
-            "description": "Person created",
-            "schema": {
-              "$ref": "#/definitions/Person"
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
             }
           },
-          "400": {
-            "description": "Bad request"
-          },
           "500": {
-            "description": "Internal server error"
+            "description": "Internal Server Error"
           }
         }
       }
     },
     "/people/{id}": {
       "get": {
-        "tags": [ "People" ],
-        "summary": "Get a person by ID",
-        "produces": [ "application/json" ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "ID of the person",
-            "required": true,
-            "type": "string"
-          }
+        "tags": [
+          "People"
         ],
+        "summary": "Get One",
         "responses": {
           "200": {
-            "description": "Successful operation",
-            "schema": {
-              "$ref": "#/definitions/Person"
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
             }
           },
           "404": {
-            "description": "Person not found"
+            "description": "Not Found"
           },
           "500": {
-            "description": "Internal server error"
+            "description": "Internal Server Error"
           }
         }
       },
       "patch": {
-        "tags": [ "People" ],
-        "summary": "Update a person",
-        "produces": [ "application/json" ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "ID of the person",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Updated person object",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PersonInput"
+        "tags": [
+          "People"
+        ],
+        "summary": "Update",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "name": "Boba Fett"
+                }
+              }
             }
           }
-        ],
+        },
         "responses": {
           "200": {
-            "description": "Person updated",
-            "schema": {
-              "$ref": "#/definitions/Person"
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
             }
           },
-          "400": {
-            "description": "Bad request"
-          },
           "404": {
-            "description": "Person not found"
+            "description": "Not Found"
           },
           "500": {
-            "description": "Internal server error"
+            "description": "Internal Server Error"
           }
         }
       },
-      "delete": {
-        "tags": [ "People" ],
-        "summary": "Delete a person",
-        "produces": [ "application/json" ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "ID of the person",
-            "required": true,
+      "parameters": [
+        {
+          "schema": {
             "type": "string"
-          }
-        ],
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "delete": {
+        "summary": "Delete",
+        "operationId": "",
         "responses": {
-          "200": {
-            "description": "Person deleted"
+          "204": {
+            "description": "No Content"
           },
           "404": {
-            "description": "Person not found"
+            "description": "Not Found"
           },
           "500": {
-            "description": "Internal server error"
+            "description": "Internal Server Error"
           }
-        }
+        },
+        "tags": [
+          "People"
+        ]
       }
-    }
-  },
-  "definitions": {
-    "Person": {
-      "type": "object",
-      "properties": {
-        "_id": {
-          "type": "string"
+    },
+    "/films": {
+      "get": {
+        "summary": "Get All",
+        "operationId": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
         },
-        "edited": {
-          "type": "string",
-          "format": "date-time"
+        "tags": [
+          "Films"
+        ]
+      },
+      "post": {
+        "tags": [
+          "Films"
+        ],
+        "summary": "Create",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "title": "Force Awaken",
+                  "episode_id": 7,
+                  "starships": [
+                    2,
+                    3,
+                    5,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13
+                  ],
+                  "vehicules": [
+                    4,
+                    6,
+                    7,
+                    8
+                  ],
+                  "planets": [
+                    1,
+                    2,
+                    3
+                  ],
+                  "producer": "Gary Kurtz, Rick McCallum",
+                  "director": "George Lucas",
+                  "release_date": "1977-05-25T00:00:00.000Z",
+                  "opening_crawl": "It is a period of civil war.\r\nRebel spaceships, striking\r\nfrom a hidden base, have won\r\ntheir first victory against\r\nthe evil Galactic Empire.\r\n\r\nDuring the battle, Rebel\r\nspies managed to steal secret\r\nplans to the Empire's\r\nultimate weapon, the DEATH\r\nSTAR, an armored space\r\nstation with enough power\r\nto destroy an entire planet.\r\n\r\nPursued by the Empire's\r\nsinister agents, Princess\r\nLeia races home aboard her\r\nstarship, custodian of the\r\nstolen plans that can save her\r\npeople and restore\r\nfreedom to the galaxy....",
+                  "characters": [
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    18,
+                    19,
+                    81
+                  ],
+                  "species": [
+                    1,
+                    2,
+                    3,
+                    4,
+                    5
+                  ]
+                }
+              }
+            }
+          }
         },
-        "name": {
-          "type": "string"
-        },
-        "created": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "gender": {
-          "type": "string"
-        },
-        "skin_color": {
-          "type": "string"
-        },
-        "hair_color": {
-          "type": "string"
-        },
-        "height": {
-          "type": "string"
-        },
-        "eye_color": {
-          "type": "string"
-        },
-        "mass": {
-          "type": "string"
-        },
-        "homeworld": {
-          "type": "number"
-        },
-        "birth_year": {
-          "type": "string"
+        "responses": {
+          "201": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
         }
       }
     },
-    "PersonInput": {
-      "type": "object",
-      "properties": {
-        "edited": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "name": {
-          "type": "string"
-        },
-        "created": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "gender": {
-          "type": "string"
-        },
-        "skin_color": {
-          "type": "string"
-        },
-        "hair_color": {
-          "type": "string"
-        },
-        "height": {
-          "type": "string"
-        },
-        "eye_color": {
-          "type": "string"
-        },
-        "mass": {
-          "type": "string"
-        },
-        "homeworld": {
-          "type": "number"
-        },
-        "birth_year": {
-          "type": "string"
-        },
-
-        "model": {
-          "type": "string"
-        },
-
-        "pk": {
-          "type": "integer"
+    "/films/{id}": {
+      "get": {
+        "tags": [
+          "Films"
+        ],
+        "summary": "Get One",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
         }
       },
-      "required": [
-        "name",
-        "gender",
-        "pk"
-      ]
+      "patch": {
+        "tags": [
+          "Films"
+        ],
+        "summary": "Update",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "title": "Star Wars 1: A New Hope",
+                  "starships": [
+                    31,
+                    32,
+                    39,
+                    40,
+                    41
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "delete": {
+        "summary": "Delete",
+        "operationId": "",
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "tags": [
+          "Films"
+        ]
+      }
+    },
+    "/planets": {
+      "get": {
+        "tags": [
+          "Planets"
+        ],
+        "summary": "Get All",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Planets"
+        ],
+        "summary": "Create",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "climate": "humid",
+                  "surface_water": "1",
+                  "name": "Terre",
+                  "diameter": "10465",
+                  "rotation_period": "23",
+                  "terrain": "desert",
+                  "gravity": "1 standard",
+                  "orbital_period": "304",
+                  "population": "6000000"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/planets/{id}": {
+      "get": {
+        "tags": [
+          "Planets"
+        ],
+        "summary": "Get One",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Planets"
+        ],
+        "summary": "Update",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "population": "200000"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "delete": {
+        "summary": "Delete",
+        "operationId": "",
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "tags": [
+          "Planets"
+        ]
+      }
+    },
+    "/species": {
+      "get": {
+        "summary": "Get All",
+        "operationId": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "tags": [
+          "Species"
+        ]
+      },
+      "post": {
+        "tags": [
+          "Species"
+        ],
+        "summary": "Create",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "classification": "mammal",
+                  "name": "Mandalorian",
+                  "designation": "sentient",
+                  "eye_colors": "black, brown, blue, green, hazel, grey, amber",
+                  "people": [
+                    1,
+                    4,
+                    5,
+                    6,
+                    7,
+                    9,
+                    10,
+                    11,
+                    12,
+                    14,
+                    18,
+                    19,
+                    21,
+                    22,
+                    25,
+                    26,
+                    28,
+                    29,
+                    32,
+                    34,
+                    35,
+                    39,
+                    42,
+                    43,
+                    51,
+                    60,
+                    61,
+                    62,
+                    66,
+                    67,
+                    68,
+                    69,
+                    74,
+                    81,
+                    82
+                  ],
+                  "skin_colors": "caucasian, black, asian, hispanic",
+                  "language": "Galactic Basic",
+                  "hair_colors": "blonde, brown, black, red",
+                  "homeworld": 9,
+                  "average_lifespan": "120",
+                  "average_height": "180"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/species/{id}": {
+      "get": {
+        "tags": [
+          "Species"
+        ],
+        "summary": "Get One",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Species"
+        ],
+        "summary": "Update",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "eye_colors": "black, brown, blue, green, hazel, grey, amber",
+                  "people": [
+                    1,
+                    4,
+                    5,
+                    6,
+                    7,
+                    9,
+                    10,
+                    11,
+                    12,
+                    14,
+                    18,
+                    19,
+                    21,
+                    22,
+                    25,
+                    26,
+                    28,
+                    29,
+                    32,
+                    34,
+                    35,
+                    39,
+                    42,
+                    43,
+                    51,
+                    60,
+                    61,
+                    62,
+                    66,
+                    67,
+                    68,
+                    69,
+                    74,
+                    81,
+                    82
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "delete": {
+        "summary": "Delete",
+        "operationId": "",
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "tags": [
+          "Species"
+        ]
+      }
+    },
+    "/starships": {
+      "get": {
+        "tags": [
+          "Starships"
+        ],
+        "summary": "Get All",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Starships"
+        ],
+        "summary": "Create",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "pilots": [
+                    1
+                  ],
+                  "MGLT": "60",
+                  "starship_class": "N-1 starfighter",
+                  "hyperdrive_rating": "5.0"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/starships/{id}": {
+      "get": {
+        "tags": [
+          "Starships"
+        ],
+        "summary": "Get One",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Starships"
+        ],
+        "summary": "Update",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "hyperdrive_rating": "1.0",
+                  "pilots": [
+                    1
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "delete": {
+        "summary": "Delete",
+        "operationId": "",
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "tags": [
+          "Starships"
+        ]
+      }
+    },
+    "/vehicules": {
+      "get": {
+        "tags": [
+          "Vehicules"
+        ],
+        "summary": "Get All",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Vehicules"
+        ],
+        "summary": "Create",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "vehicle_class": "caterpillar",
+                  "pilots": [
+                    1
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/vehicules/{id}": {
+      "get": {
+        "tags": [
+          "Vehicules"
+        ],
+        "summary": "Get One",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Vehicules"
+        ],
+        "summary": "Update",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "pilots": [
+                    1,
+                    4
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "operationId": "patch-vehicules-id"
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "delete": {
+        "summary": "Delete",
+        "operationId": "",
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "tags": [
+          "Vehicules"
+        ]
+      }
     }
+  },
+  "components": {
+    "responses": {}
   }
 }

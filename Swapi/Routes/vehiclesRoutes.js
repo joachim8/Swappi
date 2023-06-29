@@ -1,7 +1,7 @@
 const express = require('express');
 const { default: mongoose } = require('mongoose');
 const router = express.Router();
-const People = require('../models/people');
+const Vehicle = require('../Models/vehicles');
 const db = mongoose.connection;
 // Route de création d'une personne
 
@@ -9,8 +9,8 @@ const db = mongoose.connection;
 // Route pour obtenir tous les peoples
 router.get('/', async (req, res) => {
     try {
-        const peoples = await People.find();
-        res.json(peoples);
+        const vehicles = await Vehicle.find();
+        res.json(vehicles);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
@@ -18,8 +18,8 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        const person = await People.create(req.body);
-        res.status(201).json(person);
+        const vehicle = await Vehicle.create(req.body);
+        res.status(201).json(vehicle);
     } catch (error) {
         res.status(500).json({ error: 'Failed to create a person' });
     }
@@ -27,25 +27,25 @@ router.post('/', async (req, res) => {
 // Route de lecture d'une personne par ID
 router.get('/:id', async (req, res) => {
 
-        let person;
-        try {
-            person = await People.findById(req.params.id)
-            if (person == null) {
-                return res.status(404).json({ message: 'Cannot find person' });
-            }
-        } catch (err) {
-            return res.status(500).json({ message: err.message });
+    let vehicle;
+    try {
+        vehicle = await Vehicle.findById(req.params.id)
+        if (vehicle == null) {
+            return res.status(404).json({ message: 'Cannot find person' });
         }
+    } catch (err) {
+        return res.status(500).json({ message: err.message });
+    }
     res.json(person);
 
 
 });
 
 // Route de mise à jour d'une personne
-router.put('/:id', async (req, res) => {
+router.patch('/:id', async (req, res) => {
     try {
-        const person = await People.findByIdAndUpdate(req.params.id, req.body, { new: true });
-        if (person) {
+        const vehicle = await Vehicle.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (vehicle) {
             res.json(person);
         } else {
             res.status(404).json({ error: 'Person not found' });
@@ -58,9 +58,9 @@ router.put('/:id', async (req, res) => {
 // Route de suppression d'une personne
 router.delete('/:id', async (req, res) => {
     try {
-        const person = await People.findByIdAndDelete(req.params.id);
-        if (person) {
-            res.json(person);
+        const vehicle = await Vehicle.findByIdAndDelete(req.params.id);
+        if (vehicle) {
+            res.json(vehicle);
         } else {
             res.status(404).json({ error: 'Person not found' });
         }
